@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">A+Zone</string>
     <string name="nav_settings">Settings</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_login">Login</string>
     <string name="nav_item_search">Search</string>
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
+
+    <!-- Login -->
+    <string name="btn_login">Login</string>
+    <string name="et_username">Insira o nome de utilizador</string>
+    <string name="et_password">Insira a password</string>
 </resources>
