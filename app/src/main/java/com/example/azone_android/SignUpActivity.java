@@ -1,8 +1,10 @@
 package com.example.azone_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -161,5 +163,11 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             return new User(username, email, password, firstName, lastName, phone, address, nif, postal_code, city, country);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
     }
 }

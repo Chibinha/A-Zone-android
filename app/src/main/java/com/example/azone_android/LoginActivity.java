@@ -1,8 +1,10 @@
 package com.example.azone_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,5 +38,11 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         String username = mUsernameEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
     }
 }
