@@ -46,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // TODO: Show user data on header
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
     
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -55,9 +60,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_login:
                 Intent login_intent = new Intent(this, LoginActivity.class);
                 startActivity(login_intent);
+                break;
             case R.id.nav_signup:
-                Intent intent = new Intent(this, SignUpActivity.class);
-                startActivity(intent);
+                Intent signup_intent = new Intent(this, SignUpActivity.class);
+                startActivity(signup_intent);
+                break;
+            case R.id.nav_settings:
+                Intent settings_intent = new Intent(this, SettingsActivity.class);
+                startActivity(settings_intent);
+                break;
         }
 
         if(fragment != null) {

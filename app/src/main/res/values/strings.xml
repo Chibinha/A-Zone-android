@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">A+Zone</string>
+    <string name="app_api" translatable="false"></string>
+    <string name="app_preferences" translatable="false">techpower</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_login">Login</string>
     <string name="nav_item_search">Search</string>
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
+
 
     <!-- Login -->
     <string name="btn_login">Login</string>
@@ -31,6 +34,14 @@
     <string name="error_field_required">Data required</string>
     <string name="error_password_not_match">Passwords don\'t match</string>
     <string name="error_invalid_tooShort">Too short</string>
+
+    <!-- SettingsActivity -->
+    <string name="settings_et_api">Insert url here</string>
+    <string name="settings_tv_api">API Url:</string>
+    <string name="settings_btn_connect">Save</string>
+    <string name="settings_api_saved">API Saved Successfully</string>
+
+
 
 
 </resources>
