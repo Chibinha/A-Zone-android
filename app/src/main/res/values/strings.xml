@@ -41,7 +41,9 @@
     <string name="settings_btn_connect">Save</string>
     <string name="settings_api_saved">API Saved Successfully</string>
 
-
-
+    <!-- Cart  Page -->
+    <string name="Cart_title">Cart</string>
+    <string name="textView_total">Total:</string>
+    <string name="btn_checkout" translatable="false">CHECKOUT</string>
 
 </resources>
