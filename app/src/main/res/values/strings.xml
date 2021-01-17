@@ -46,4 +46,11 @@
     <string name="textView_total">Total:</string>
     <string name="btn_checkout" translatable="false">CHECKOUT</string>
 
+    <!-- Checkout  Page -->
+    <string name="checkout_title" translatable="false">Checkout</string>
+    <string name="tv_items">ITEMS</string>
+    <string name="tv_ShippingAdress">SHIPPING ADDRESS</string>
+    <string name="btn_PlaceOrder">Place Order</string>
+
+
 </resources>
