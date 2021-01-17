@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.azone_android.models.User;
+
 public class SignUpActivity extends AppCompatActivity {
 
     Button btn_signUp;
@@ -48,7 +50,116 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (attemptRegistration() != null){
+                    finish();
+                }
             }
         });
+    }
+
+    private User attemptRegistration() {
+        // Resets all form errors
+        mUsername.setError(null);
+        mEmail.setError(null);
+        mPassword.setError(null);
+        mFirstName.setError(null);
+        mLastName.setError(null);
+        mPhone.setError(null);
+        mAddress.setError(null);
+        mPostalCode.setError(null);
+        mCity.setError(null);
+        mCountry.setError(null);
+        mNif.setError(null);
+
+
+        final String username = mUsername.getText().toString();
+        final String email = mEmail.getText().toString();
+        final String password = mPassword.getText().toString();
+        final String firstName = mFirstName.getText().toString();
+        final String lastName = mLastName.getText().toString();
+        final String phone = mPhone.getText().toString();
+        final String address = mAddress.getText().toString();
+        final String postal_code = mPostalCode.getText().toString();
+        final String city = mCity.getText().toString();
+        final String country = mCountry.getText().toString();
+        final String nif = mNif.getText().toString();
+
+
+        boolean cancel = false;
+        View focusView = null;
+
+        String confirmPassword = mConfirmPassword.getText().toString();
+        if (!confirmPassword.equals(password) || password.length() < 6) {
+            mConfirmPassword.setError(getString(R.string.error_invalid_tooShort) + " or " + getString(R.string.error_password_not_match));
+            focusView = mPassword;
+            cancel = true;
+        }
+
+        if (!User.checkUsername(username)) {
+            mUsername.setError(getString(R.string.error_field_required));
+            focusView = mUsername;
+            cancel = true;
+        }
+
+        if (!User.checkEmail(email)) {
+            mEmail.setError(getString(R.string.error_field_required));
+            focusView = mEmail;
+            cancel = true;
+        }
+
+        if (!User.checkFirstName(firstName)) {
+            mFirstName.setError(getString(R.string.error_field_required));
+            focusView = mFirstName;
+            cancel = true;
+        }
+
+        if (!User.checkLastName(lastName)) {
+            mLastName.setError(getString(R.string.error_field_required));
+            focusView = mLastName;
+            cancel = true;
+        }
+
+        if (!User.checkAddress(address)) {
+            mAddress.setError(getString(R.string.error_field_required));
+            focusView = mAddress;
+            cancel = true;
+        }
+
+        if (!User.checkCity(city)) {
+            mCity.setError(getString(R.string.error_field_required));
+            focusView = mCity;
+            cancel = true;
+        }
+
+        if (!User.checkCountry(country)) {
+            mCountry.setError(getString(R.string.error_field_required));
+            focusView = mCountry;
+            cancel = true;
+        }
+
+        if (!User.checkPostalCode(postal_code)) {
+            mPostalCode.setError(getString(R.string.error_field_required));
+            focusView = mPostalCode;
+            cancel = true;
+        }
+
+        if (!User.checkPhone(phone)) {
+            mPhone.setError(getString(R.string.error_field_required));
+            focusView = mPhone;
+            cancel = true;
+        }
+
+        if (!User.checkNif(nif)) {
+            mNif.setError(getString(R.string.error_field_required));
+            focusView = mNif;
+            cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+            return null;
+        } else {
+            return new User(username, email, password, firstName, lastName, phone, address, nif, postal_code, city, country);
+        }
     }
 }

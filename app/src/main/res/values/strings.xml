@@ -27,5 +27,10 @@
     <string name="et_nif" translatable="false">NIF</string>
     <string name="tv_signup">Sign Up</string>
 
+    <!-- Form Error Messages -->
+    <string name="error_field_required">Data required</string>
+    <string name="error_password_not_match">Passwords don\'t match</string>
+    <string name="error_invalid_tooShort">Too short</string>
+
 
 </resources>
