@@ -9,6 +9,23 @@
 
     <!-- Login -->
     <string name="btn_login">Login</string>
-    <string name="et_username">Insira o nome de utilizador</string>
-    <string name="et_password">Insira a password</string>
+
+    <!-- Sign Up -->
+    <string name="nav_signup">Sign up</string>
+    <string name="btn_signup">Sign up</string>
+    <string name="et_username">Username</string>
+    <string name="et_email" translatable="false">E-mail</string>
+    <string name="et_password">Password</string>
+    <string name="et_confirmPassword">Confirm Password</string>
+    <string name="et_firstName">First name</string>
+    <string name="et_lastName">Last name</string>
+    <string name="et_phone">Phone number</string>
+    <string name="et_address">Address</string>
+    <string name="et_postalCode">Postal code</string>
+    <string name="et_city">City</string>
+    <string name="et_country">Country</string>
+    <string name="et_nif" translatable="false">NIF</string>
+    <string name="tv_signup">Sign Up</string>
+
+
 </resources>

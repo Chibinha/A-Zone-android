@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_login:
                 Intent login_intent = new Intent(this, LoginActivity.class);
                 startActivity(login_intent);
+            case R.id.nav_signup:
+                Intent intent = new Intent(this, SignUpActivity.class);
+                startActivity(intent);
         }
 
         if(fragment != null) {
