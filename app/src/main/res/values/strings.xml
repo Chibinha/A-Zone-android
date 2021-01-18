@@ -52,5 +52,8 @@
     <string name="tv_ShippingAdress">SHIPPING ADDRESS</string>
     <string name="btn_PlaceOrder">Place Order</string>
 
+    <!-- Product Details -->
+    <string name="details_btn_addToCart">Add to Cart</string>
+
 
 </resources>
