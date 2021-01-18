@@ -34,6 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CartActivity" />
         </activity>
+        <activity android:name=".ProductDetailsActivity" />
     </application>
 
 </manifest>

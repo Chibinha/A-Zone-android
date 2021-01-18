@@ -49,6 +49,10 @@ public class ProductListFragment extends Fragment implements ProductListener {
         mListViewProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product product = (Product) parent.getItemAtPosition(position);
+                Intent product_intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                product_intent.putExtra("ID", product.getId());
+                startActivity(product_intent);
             }
         });
 
