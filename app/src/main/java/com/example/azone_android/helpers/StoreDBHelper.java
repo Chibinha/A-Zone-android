@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.azone_android.models.Category;
+import com.example.azone_android.models.Product;
+
+import java.util.ArrayList;
+
 public class StoreDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "storeDB";
@@ -66,5 +71,44 @@ public class StoreDBHelper extends SQLiteOpenHelper {
 
 
 
+    public void insertProductDB(Product product) {
+        ContentValues values = new ContentValues();
+        values.put(PRODUCT_ID, product.getId());
+        values.put(PRODUCT_NAME, product.getName());
+        values.put(PRODUCT_DESCRIPTION, product.getDescription());
+        values.put(PRODUCT_PRICE, product.getPrice());
+        values.put(PRODUCT_IMAGE, product.getImage());
+        values.put(PRODUCT_CATEGORY, product.getIdCategory());
+
+        this.database.insert(PRODUCT_TABLE_NAME, null, values);
+    }
+
+    public void deleteAllProductDB() {
+        this.database.delete(PRODUCT_TABLE_NAME, null, null);
+    }
+
+    public ArrayList<Product> getAllProductsDB() {
+        ArrayList<Product> products = new ArrayList<>();
+        Cursor cursor = this.database.query(PRODUCT_TABLE_NAME,
+                new String[]{PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, PRODUCT_CATEGORY},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Product auxProduct = new Product(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getFloat(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5));
+                auxProduct.setId(cursor.getInt(0));
+                products.add(auxProduct);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return products;
+    }
 
 }

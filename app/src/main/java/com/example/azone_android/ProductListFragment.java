@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,31 +13,54 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.azone_android.adapters.ProductListAdapter;
+import com.example.azone_android.listeners.ProductListener;
+import com.example.azone_android.models.Product;
+import com.example.azone_android.models.SingletonStore;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements ProductListener {
 
+    private ListView mListViewProducts;
+    private ProductListAdapter mProductListAdapter;
 
     public ProductListFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
-        // Add options menu
         setHasOptionsMenu(true);
-        // Set fab click listener
+
+        mListViewProducts = view.findViewById(R.id.listView_products);
+        mListViewProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
+
+        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                SingletonStore.getInstance(getContext()).getAllProductsAPI(getContext(), SingletonStore.isConnectedInternet(getContext()));
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +69,8 @@ public class ProductListFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        SingletonStore.getInstance(getContext()).setProductListener(this);
 
         return view;
     }
@@ -71,5 +97,18 @@ public class ProductListFragment extends Fragment {
         });
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onRefreshProductList(ArrayList<Product> productArrayList) {
+        mProductListAdapter = new ProductListAdapter(getContext(), productArrayList);
+        mListViewProducts.setAdapter(mProductListAdapter);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SingletonStore.getInstance(getContext()).getAllProductsAPI(getContext(), SingletonStore.isConnectedInternet(getContext()));
     }
 }
