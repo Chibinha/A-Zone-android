@@ -69,7 +69,7 @@ public class StoreDBHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-
+    /* CRUD Product */
 
     public void insertProductDB(Product product) {
         ContentValues values = new ContentValues();
@@ -109,6 +109,43 @@ public class StoreDBHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return products;
+    }
+
+    /* CRUD Category */
+
+    public ArrayList<Category> getAllCategoriesDB() {
+        ArrayList<Category> categories = new ArrayList<>();
+        Cursor cursor = this.database.query(CATEGORY_TABLE_NAME,
+                new String[]{CATEGORY_ID, CATEGORY_NAME, CATEGORY_PARENT},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Category auxCategory = new Category(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2)
+                );
+                auxCategory.setId(cursor.getInt(0));
+                categories.add(auxCategory);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return categories;
+    }
+
+    public void insertCategoryDB(Category category) {
+        ContentValues values = new ContentValues();
+        values.put(CATEGORY_ID, category.getId());
+        values.put(CATEGORY_NAME, category.getName());
+        values.put(CATEGORY_PARENT, category.getParent_id());
+
+        this.database.insert(CATEGORY_TABLE_NAME, null, values);
+    }
+
+    public void deleteAllCategoriesDB() {
+        this.database.delete(CATEGORY_TABLE_NAME, null, null);
     }
 
 }

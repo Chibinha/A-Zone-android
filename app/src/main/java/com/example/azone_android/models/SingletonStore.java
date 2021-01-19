@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.azone_android.R;
+import com.example.azone_android.Utils.CategoryJsonParser;
 import com.example.azone_android.Utils.ProductJsonParser;
 import com.example.azone_android.helpers.StoreDBHelper;
 import com.example.azone_android.listeners.ProductListener;
@@ -100,6 +101,19 @@ public class SingletonStore {
         return null;
     }
 
+    /* CRUD Categories */
+
+    public void insertCategoriesDB(ArrayList<Category> categoryList) {
+        mStoreDB.deleteAllCategoriesDB();
+        for (Category category : categoryList) {
+            mStoreDB.insertCategoryDB(category);
+        }
+    }
+
+    public ArrayList<Category> getCategoriesDB() {
+        return mStoreDB.getAllCategoriesDB();
+    }
+
     public void getAllProductsAPI(final Context context, boolean isConnected) {
         if (!isConnected) {
             Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
@@ -127,4 +141,25 @@ public class SingletonStore {
             addToRequestQueue(request);
         }
     }
+
+    public void getAllCategoriesAPI(final Context context, boolean isConnected) {
+        if (!isConnected) {
+            Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
+        } else {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, sApiUrl + "/api/categories", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    mCategoryList = CategoryJsonParser.parserJsonCategories(response, context);
+                    insertCategoriesDB(mCategoryList);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            addToRequestQueue(request);
+        }
+    }
+
 }
