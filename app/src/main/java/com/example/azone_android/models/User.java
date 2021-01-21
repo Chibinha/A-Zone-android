@@ -1,6 +1,10 @@
 package com.example.azone_android.models;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class User {
@@ -225,5 +229,26 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    public static void saveUser(JSONObject response, SharedPreferences preferences){
+        try {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("id", response.getString("id"));
+            editor.putString("username", response.getString("username"));
+            editor.putString("authkey", response.getString("auth_key"));
+            editor.putString("email", response.getString("email"));
+            editor.putString("firstName", response.getString("firstName"));
+            editor.putString("lastName", response.getString("lastName"));
+            editor.putString("phone", response.getString("phone"));
+            editor.putString("address", response.getString("address"));
+            editor.putString("nif", response.getString("nif"));
+            editor.putString("postal_code", response.getString("postal_code"));
+            editor.putString("city", response.getString("city"));
+            editor.putString("country", response.getString("country"));
+            editor.apply();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

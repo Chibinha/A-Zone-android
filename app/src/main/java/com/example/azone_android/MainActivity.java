@@ -1,9 +1,12 @@
 package com.example.azone_android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
     private Menu menu;
+    private TextView mNameTextView;
+    private TextView mEmailTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle("A+Zone");
         fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
 
-        // TODO: Show user data on header
+        View header = navigationView.getHeaderView(0);
+        mNameTextView = header.findViewById(R.id.textView_user_name);
+        mEmailTextView = header.findViewById(R.id.textView_user_email);
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_preferences), MODE_PRIVATE);
+        mNameTextView.setText(preferences.getString("username", "Guest"));
+        mEmailTextView.setText(preferences.getString("email", "guest@email.com"));
     }
 
     @Override
@@ -75,6 +86,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
         navigationView.invalidate();
+
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_preferences), MODE_PRIVATE);
+        Menu accountSubMenu = menu.addSubMenu(R.string.nav_account, Menu.NONE, 1, R.string.nav_account);
+        if (preferences.getString("authkey", null) == null) {
+            accountSubMenu.add(Menu.NONE, R.string.nav_login, Menu.NONE, R.string.nav_login);
+            accountSubMenu.add(Menu.NONE, R.string.nav_signup, Menu.NONE, R.string.nav_signup);
+        } else {
+            accountSubMenu.add(Menu.NONE, R.string.nav_logout, Menu.NONE, R.string.nav_logout);
+        }
+        navigationView.invalidate();
     }
 
     @Override
@@ -82,17 +103,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         switch (menuItem.getItemId()) {
-            case R.id.nav_login:
+            case R.string.nav_login:
                 Intent login_intent = new Intent(this, LoginActivity.class);
                 startActivity(login_intent);
                 break;
-            case R.id.nav_signup:
+            case R.string.nav_signup:
                 Intent signup_intent = new Intent(this, SignUpActivity.class);
                 startActivity(signup_intent);
                 break;
             case R.id.nav_settings:
                 Intent settings_intent = new Intent(this, SettingsActivity.class);
                 startActivity(settings_intent);
+                break;
+            case R.string.nav_logout:
                 break;
         }
 
