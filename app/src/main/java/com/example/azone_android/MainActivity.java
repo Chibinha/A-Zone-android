@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             categoriesSubMenu.add(Menu.NONE, category.getId(), Menu.NONE,category.getName()).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
+                    int category_id = menuItem.getItemId();
+                    SingletonStore.getInstance(getApplicationContext()).getProductsByCategory(getApplicationContext(), category_id);
+                    setTitle(category.getName());
                     return false;
                 }
             });

@@ -101,6 +101,17 @@ public class SingletonStore {
         return null;
     }
 
+    public void getProductsByCategory(final Context context, int id_category) {
+        mProductList = mStoreDB.getAllProductsByCategoryDB(id_category);
+
+        if (mProductListener != null) {
+            mProductListener.onRefreshProductList(mProductList);
+        }
+        if (mProductList.isEmpty()) {
+            Toast.makeText(context, "This category doesn't have any products", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     /* CRUD Categories */
 
     public void insertCategoriesDB(ArrayList<Category> categoryList) {

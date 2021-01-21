@@ -111,6 +111,31 @@ public class StoreDBHelper extends SQLiteOpenHelper {
         return products;
     }
 
+    public ArrayList<Product> getAllProductsByCategoryDB(int id_category) {
+        ArrayList<Category> mAllCategories = new ArrayList<>();
+        mAllCategories = getAllCategoriesDB();
+
+        ArrayList<Category> mCategories = new ArrayList<>();
+        for (Category category: mAllCategories) {
+            if (category.getParent_id() == id_category || category.getId() == id_category){
+                mCategories.add(category);
+            }
+        }
+
+        ArrayList<Product> mAllProducts = new ArrayList<>();
+        mAllProducts = getAllProductsDB();
+
+        ArrayList<Product> CategoryProducts = new ArrayList<>();
+        for (Category category: mCategories) {
+            for (Product product : mAllProducts) {
+                if (product.getIdCategory() == category.getId()) {
+                    CategoryProducts.add(product);
+                }
+            }
+        }
+        return CategoryProducts;
+    }
+
     /* CRUD Category */
 
     public ArrayList<Category> getAllCategoriesDB() {
