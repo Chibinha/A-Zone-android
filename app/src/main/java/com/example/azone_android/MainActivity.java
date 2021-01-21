@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.azone_android.models.Category;
 import com.example.azone_android.models.SingletonStore;
+import com.example.azone_android.models.User;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         menu.removeGroup(R.string.nav_categories);
+        menu.removeGroup(R.string.nav_account);
 
         SingletonStore.getInstance(getApplicationContext()).getAllCategoriesAPI(getApplicationContext(), SingletonStore.isConnectedInternet(getApplicationContext()));
         ArrayList<Category> categoryList = SingletonStore.getInstance(getApplicationContext()).getCategoriesDB();
@@ -116,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(settings_intent);
                 break;
             case R.string.nav_logout:
+                User.deleteUser(getApplicationContext());
+                finish();
+                startActivity(getIntent());
+                Toast.makeText(getApplicationContext(), R.string.logout_success, Toast.LENGTH_SHORT).show();
                 break;
         }
 

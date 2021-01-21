@@ -1,7 +1,10 @@
 package com.example.azone_android.models;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import com.example.azone_android.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -251,4 +254,27 @@ public class User {
             e.printStackTrace();
         }
     }
+
+    public static void deleteUser(Context context){
+        try {
+            SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.app_preferences), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove("id");
+            editor.remove("username");
+            editor.remove("authkey");
+            editor.remove("email");
+            editor.remove("firstName");
+            editor.remove("lastName");
+            editor.remove("phone");
+            editor.remove("address");
+            editor.remove("nif");
+            editor.remove("postal_code");
+            editor.remove("city");
+            editor.remove("country");
+            editor.apply();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
