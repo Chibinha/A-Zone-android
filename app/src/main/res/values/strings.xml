@@ -37,6 +37,8 @@
     <string name="et_country">Country</string>
     <string name="et_nif" translatable="false">NIF</string>
     <string name="tv_signup">Sign Up</string>
+    <string name="signup_success">Account Created Successfully!</string>
+    <string name="signup_error">ERROR!\nUsername, E-mail or NIF Already in use.</string>
 
     <!-- Form Error Messages -->
     <string name="error_field_required">Data required</string>
