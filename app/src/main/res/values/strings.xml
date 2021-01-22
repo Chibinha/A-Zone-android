@@ -65,5 +65,9 @@
     <!-- Product Details -->
     <string name="details_btn_addToCart">Add to Cart</string>
 
+    <!-- User Page -->
+    <string name="nav_userPage">User Page</string>
+    <string name="btn_update">UPDATE</string>
+    <string name="btn_delete">DELETE ACCOUNT</string>
 
 </resources>
