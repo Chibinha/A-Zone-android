@@ -181,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signupUserAPI(final User user, final Context context){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SingletonStore.getInstance(this).getApiUrl() + "/api/users",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SingletonStore.getInstance(this).getApiUrl() + "/api/users/signup",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
