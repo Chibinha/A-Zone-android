@@ -44,13 +44,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/et_username"
-                android:inputType="text" />
+                android:inputType="none"
+                android:editable="false"/>
 
             <TextView
                 android:id="@+id/textView_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/et_address" />
+                android:text="@string/et_address"/>
 
             <EditText
                 android:id="@+id/editText_userPage_email"
@@ -58,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/et_email"
-                android:inputType="textEmailAddress" />
+                android:inputType="none"
+                android:editable="false"/>
 
             <TextView
                 android:id="@+id/textView_firstName"
