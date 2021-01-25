@@ -33,6 +33,7 @@ public class SingletonStore {
     private ArrayList<Category> mCategoryList;
     private StoreDBHelper mStoreDB;
     private ProductListener mProductListener;
+    private ArrayList<CartItem> mCart;
 
 
     private SingletonStore(Context context) {
@@ -41,6 +42,7 @@ public class SingletonStore {
         mProductList = new ArrayList<>();
         mCategoryList = new ArrayList<>();
         mStoreDB = new StoreDBHelper(context);
+        mCart = new ArrayList<>();
     }
 
     public static synchronized SingletonStore getInstance(Context context) {
@@ -170,6 +172,26 @@ public class SingletonStore {
                 }
             });
             addToRequestQueue(request);
+        }
+    }
+
+    /* CRUD CART */
+
+    public void addProductCart(int productId, int quantity) {
+        int exists = 0;
+        if (mCart.size() == 0) {
+            CartItem new_item = new CartItem(productId, quantity);
+            mCart.add(new_item);
+        } else {
+            for (CartItem item : mCart) {
+                if (item.getId() == productId) {
+                    exists = 1;
+                }
+            }
+            if (exists != 1){
+                CartItem new_item = new CartItem(productId, quantity);
+                mCart.add(new_item);
+            }
         }
     }
 
