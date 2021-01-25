@@ -55,6 +55,10 @@
     <string name="Cart_title">Cart</string>
     <string name="textView_total">Total:</string>
     <string name="btn_checkout" translatable="false">CHECKOUT</string>
+    <string name="cart_delete_alert_dialog">Are you sure you want to remove this item?</string>
+    <string name="cart_item_delete_alert_ok">Remove</string>
+    <string name="cart_item_delete_alert_cancel">Cancel</string>
+
 
     <!-- Checkout  Page -->
     <string name="checkout_title" translatable="false">Checkout</string>

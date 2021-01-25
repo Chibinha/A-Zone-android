@@ -1,6 +1,7 @@
 package com.example.azone_android.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -116,6 +119,7 @@ public class CartListAdapter extends BaseAdapter {
             mButtonPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                 }
             });
             mButtonMinus.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +130,17 @@ public class CartListAdapter extends BaseAdapter {
             mButtonRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setMessage(R.string.cart_delete_alert_dialog)
+                            .setPositiveButton((R.string.cart_item_delete_alert_ok), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mCartArrayList.remove(item);
+                                    notifyDataSetChanged();
+                                }
+                            }).setNegativeButton((R.string.cart_item_delete_alert_cancel), null);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
             });
         }
