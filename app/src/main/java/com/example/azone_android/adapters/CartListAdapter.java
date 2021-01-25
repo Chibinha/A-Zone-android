@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -119,12 +120,33 @@ public class CartListAdapter extends BaseAdapter {
             mButtonPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (item.getQuantity() >= 5) {
+                        Toast.makeText(mContext, "You can't purchase more than 5 of an Item", Toast.LENGTH_SHORT).show();
+                    } else {
+                        item.setQuantity(item.getQuantity() + 1);
+                        mTextViewProductQuantity.setText(String.valueOf(item.getQuantity()));
+                    }
                 }
             });
             mButtonMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (item.getQuantity() != 1) {
+                        item.setQuantity(item.getQuantity() - 1);
+                        mTextViewProductQuantity.setText(String.valueOf(item.getQuantity()));
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage(R.string.cart_quantity_0_alert_dialog)
+                                .setPositiveButton((R.string.cart_item_delete_alert_ok), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        mCartArrayList.remove(item);
+                                        notifyDataSetChanged();
+                                    }
+                                }).setNegativeButton((R.string.cart_item_delete_alert_cancel), null);
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
                 }
             });
             mButtonRemove.setOnClickListener(new View.OnClickListener() {

@@ -58,7 +58,7 @@
     <string name="cart_delete_alert_dialog">Are you sure you want to remove this item?</string>
     <string name="cart_item_delete_alert_ok">Remove</string>
     <string name="cart_item_delete_alert_cancel">Cancel</string>
-
+    <string name="cart_quantity_0_alert_dialog">Setting the quantity to 0 will remove this item, do you want to remove it?</string>
 
     <!-- Checkout  Page -->
     <string name="checkout_title" translatable="false">Checkout</string>
