@@ -195,4 +195,12 @@ public class SingletonStore {
         }
     }
 
+    public ArrayList<CartItem> getCart() {
+        return mCart;
+    }
+
+    public CartItem getCartItem(int pos) {
+        return mCart.get(pos);
+    }
+
 }

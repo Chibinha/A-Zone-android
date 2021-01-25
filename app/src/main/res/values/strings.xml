@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">A+Zone</string>
     <string name="app_api" translatable="false"></string>
-    <string name="app_preferences" translatable="false">techpower</string>
+    <string name="app_preferences" translatable="false">A+Zone</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_item_search">Search</string>
     <string name="navigation_drawer_open">open</string>
