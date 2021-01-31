@@ -203,4 +203,12 @@ public class SingletonStore {
         return mCart.get(pos);
     }
 
+    public String getCartTotal() {
+        float total = 0;
+        for (CartItem item : getCart()) {
+            Product product = SingletonStore.getInstance(sContext).getProduct(item.getId());
+            total += product.getPrice() * item.getQuantity();
+        }
+        return String.format("%.2f", total);
+    }
 }

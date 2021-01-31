@@ -26,6 +26,7 @@ public class CartActivity extends AppCompatActivity implements CartListAdapter.O
     private String total;
     private ArrayList<CartItem> cart;
     private CartListAdapter mCartListAdapter;
+    private Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,14 @@ public class CartActivity extends AppCompatActivity implements CartListAdapter.O
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_checkout.setEnabled(true);
-                Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                startActivity(intent);
+                if (!total.equals("0.00") && !total.equals("0,00")) {
+                    btn_checkout.setEnabled(true);
+                    Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+                    startActivity(intent);
+                } else {
+                    btn_checkout.setEnabled(false);
+                    Toast.makeText(getApplicationContext(), "Cannot checkout without items in Cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -59,6 +65,38 @@ public class CartActivity extends AppCompatActivity implements CartListAdapter.O
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!thread.isInterrupted()) {
+                        Thread.sleep(200);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                total = SingletonStore.getInstance(getApplicationContext()).getCartTotal();
+                                tv_total.setText(total + "€");
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        thread.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        thread.interrupt();
     }
 
     @Override
