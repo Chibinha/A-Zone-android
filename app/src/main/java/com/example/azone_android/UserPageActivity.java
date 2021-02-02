@@ -222,7 +222,7 @@ public class UserPageActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context, "Update Error: " + error.toString(), Toast.LENGTH_LONG).show();
-                        Log.e("Techpower", "Update Error: " + error.toString());
+                        Log.e("A+ Zone", "Update Error: " + error.toString());
                     }
                 }
         );

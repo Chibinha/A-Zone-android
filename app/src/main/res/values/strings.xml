@@ -65,6 +65,9 @@
     <string name="tv_items">ITEMS</string>
     <string name="tv_ShippingAdress">SHIPPING ADDRESS</string>
     <string name="btn_PlaceOrder">Place Order</string>
+    <string name="label_quantity">Quantity:</string>
+    <string name="checkout_no_login">Please, make sure you are logged in!</string>
+    <string name="sale_completed">Your purchase was completed with success</string>
 
     <!-- Product Details -->
     <string name="details_btn_addToCart">Add to Cart</string>
